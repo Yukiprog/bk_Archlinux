@@ -3,7 +3,7 @@ FROM archlinux:latest
 
 ARG USERNAME=yuki
 ARG PASSWORD=hogehoge
-ARG REPOSITORY=/home/${USERNAME}/src/archLinux
+ARG HOME_DIR=/home/${USERNAME}
 ENV HOME /home/${USERNAME}
 
 RUN pacman -Syu --noconfirm
@@ -28,8 +28,7 @@ RUN pacman -S wget --noconfirm
 WORKDIR /home/${USERNAME}
 USER ${USERNAME}
 #ディレクトリ名は英語に
-RUN LANG=C xdg-user-dirs-update --force &&\
-	mkdir -p ${REPOSITORY}
+RUN LANG=C xdg-user-dirs-update --force
 
 USER ${USERNAME}
 WORKDIR /tmp
@@ -38,5 +37,5 @@ RUN wget https://github.com/Jguer/yay/releases/download/v10.2.3/yay_10.2.3_x86_6
 USER root
 RUN cp /tmp/yay_10.2.3_x86_64/yay /usr/bin/yay
 USER ${USERNAME}
-WORKDIR ${REPOSITORY}
+WORKDIR ${HOME_DIR}
 #RUN git clone

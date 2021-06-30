@@ -11,3 +11,9 @@ backup: #backup current archlinux state
 	mkdir -p ${PWD}/ArchLinux
 	pacman -Qnq > ${PWD}/ArchLinux/pacmanlist
 	pacman -Qqem > ${PWD}/ArchLinux/aurlist
+
+docker_image: docker
+	docker build -t dotfiles ${PWD}
+
+testbackup: docker_image # Test this Makefile with mount backup directory
+	docker run -it --name make$@ -v /home/${USER}/bk_Archlinux:${HOME}/:cached --name makefiletest -d dotfiles:latest /bin/bash
