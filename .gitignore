@@ -10,5 +10,8 @@
 !Makefile
 !ArchLinux
 !Dockerfile
-!.config
 
+!/.config/
+/.config/*
+!/.config/gzdoom/
+!/.config/gzdoom/*
