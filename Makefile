@@ -33,5 +33,15 @@ backup: #backup current archlinux state
 docker_image: docker
 	docker build -t dotfiles ${PWD}
 
+dzdoom: # on the assumption,  Installing yay and Existing rar file in Files directory. Considering later...
+	yay -S brutal-doom
+	$(PACMAN) unrar
+	unrar e ${PWD}/Files/brutalv21.rar
+	sudo mv ${PWD}/Files/DOOM.WAD ${PWD}/Files/DOOM2.WAD ${PWD}/Files/PLUTONIA.WAD /usr/share/games/brutal-doom/
+	sudo mv /usr/share/games/brutal-doom/brutal-doom.pk3 /usr/share/games/brutal-doom/brutal-doom_ori.pk3
+	sudo mv ${PWD}/Files/brutal-doom.pk3 /usr/share/games/brutal-doom/brutal-doom.pk3
+	test -L ${HOME}/.config/gzdoom || rm -rf ${HOME}/.config/gzdoom
+	ln -vsfn ${PWD}/.config/gzdoom ${HOME}/.config/gzdoom
+
 testbackup: docker_image # Test this Makefile with mount backup directory
 	docker run -it --name make$@ -v /home/${USER}/bk_Archlinux:${HOME}/:cached --name makefiletest -d dotfiles:latest /bin/bash

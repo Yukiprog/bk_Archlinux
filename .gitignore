@@ -6,7 +6,9 @@
 
 # whitelist
 !/README.md
-!.gitignore
+!/.gitignore
 !Makefile
 !ArchLinux
 !Dockerfile
+!.config
+
