@@ -20,6 +20,9 @@ base: #installing base packages
 base_devel: #installing base_devel packages
 	$(PACMAN) $(BASE_DEVEL_PKGS)
 
+init: # setting dotfiles
+	ln -vsf ${PWD}/.Xresources ${HOME}/.Xresources
+
 docker: # initial setup(exexute enable and start)
 	$(PACMAN) $@
 	sudo usermod -aG docker ${USER}
