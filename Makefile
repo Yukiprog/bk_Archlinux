@@ -1,5 +1,6 @@
 #variables
 PACMAN := sudo pacman -S
+PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
 
 #PACKAGES :=
@@ -14,6 +15,9 @@ BASE_PKGS += iputils iproute2
 BASE_DEVEL_PKGS := autoconf automake binutils bison fakeroot file findutils flex
 BASE_DEVEL_PKGS += gawk gcc gettext grep groff gzip libtool m4
 BASE_DEVEL_PKGS += make pacman patch pkgconf sed sudo texinfo which
+
+update_pacman:
+	$(PACMAN_UPDATE)
 
 #backup etc...
 backup: #backup current archlinux state
@@ -43,6 +47,11 @@ dzdoom: # on the assumption,  Installing yay and Existing rar file in Files dire
 	test -L ${HOME}/.config/gzdoom || rm -rf ${HOME}/.config/gzdoom
 	ln -vsfn ${PWD}/.config/gzdoom ${HOME}/.config/gzdoom
 
+emacs: #installing emacs
+	$(PACMAN) $@
+	test -L ${HOME}/.emacs.d || rm -rf ${HOME}/.emacs.d
+	ln -vsfn ${PWD}/.emacs.d ${HOME}/.emacs.d
+
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
 	$(PACMAN) $@
@@ -53,4 +62,7 @@ docker_image: docker
 	docker build -t dotfiles ${PWD}
 
 testbackup: docker_image # Test this Makefile with mount backup directory
-	docker run -it --name make$@ -v /home/${USER}/bk_Archlinux:${HOME}/:cached --name makefiletest -d dotfiles:latest /bin/bash
+	docker run -it --name make$@ -v ${HOME}/bk_Archlinux:${HOME}/bk_Archlinux:cached --name makefiletest -d dotfiles:latest /bin/bash
+
+appinstall: update_pacman urxvt dzdoom emacs
+create_docker: docker docker_image testbackup
