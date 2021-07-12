@@ -1,4 +1,8 @@
 #variables
+PACMAN := sudo pacman -S
+SYSTEMD_ENABLE := sudo systemctl --now enable
+
+#PACKAGES :=
 
 #26packages
 BASE_PKGS := filesystem gcc-libs glibc bash coreutils file findutils gawk
@@ -11,30 +15,23 @@ BASE_DEVEL_PKGS := autoconf automake binutils bison fakeroot file findutils flex
 BASE_DEVEL_PKGS += gawk gcc gettext grep groff gzip libtool m4
 BASE_DEVEL_PKGS += make pacman patch pkgconf sed sudo texinfo which
 
-PACMAN := sudo pacman -S
-SYSTEMD_ENABLE := sudo systemctl --now enable
+#backup etc...
+backup: #backup current archlinux state
+	mkdir -p ${PWD}/ArchLinux
+	pacman -Qnq > ${PWD}/ArchLinux/pacmanlist
+	pacman -Qqem > ${PWD}/ArchLinux/aurlist
 
+#basic etc...
 base: #installing base packages
 	$(PACMAN) $(BASE_PKGS)
 
 base_devel: #installing base_devel packages
 	$(PACMAN) $(BASE_DEVEL_PKGS)
 
-init: # setting dotfiles
+#app etc...
+urxvt: # Init rxvt-unicode terminal
+	$(PACMAN) rxvt-unicode
 	ln -vsf ${PWD}/.Xresources ${HOME}/.Xresources
-
-docker: # initial setup(exexute enable and start)
-	$(PACMAN) $@
-	sudo usermod -aG docker ${USER}
-	$(SYSTEMD_ENABLE) $@.service
-
-backup: #backup current archlinux state
-	mkdir -p ${PWD}/ArchLinux
-	pacman -Qnq > ${PWD}/ArchLinux/pacmanlist
-	pacman -Qqem > ${PWD}/ArchLinux/aurlist
-
-docker_image: docker
-	docker build -t dotfiles ${PWD}
 
 dzdoom: # on the assumption,  Installing yay and Existing rar file in Files directory. Considering later...
 	yay -S brutal-doom
@@ -45,6 +42,15 @@ dzdoom: # on the assumption,  Installing yay and Existing rar file in Files dire
 	sudo mv ${PWD}/Files/brutal-doom.pk3 /usr/share/games/brutal-doom/brutal-doom.pk3
 	test -L ${HOME}/.config/gzdoom || rm -rf ${HOME}/.config/gzdoom
 	ln -vsfn ${PWD}/.config/gzdoom ${HOME}/.config/gzdoom
+
+#creating test env etc...
+docker: # initial setup(exexute enable and start)
+	$(PACMAN) $@
+	sudo usermod -aG docker ${USER}
+	$(SYSTEMD_ENABLE) $@.service
+
+docker_image: docker
+	docker build -t dotfiles ${PWD}
 
 testbackup: docker_image # Test this Makefile with mount backup directory
 	docker run -it --name make$@ -v /home/${USER}/bk_Archlinux:${HOME}/:cached --name makefiletest -d dotfiles:latest /bin/bash
