@@ -3,7 +3,7 @@ PACMAN := sudo pacman -S
 PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
 
-#PACKAGES :=
+PACKAGES := man-db man-pages
 
 #26packages
 BASE_PKGS := filesystem gcc-libs glibc bash coreutils file findutils gawk
@@ -32,7 +32,10 @@ base: #installing base packages
 base_devel: #installing base_devel packages
 	$(PACMAN) $(BASE_DEVEL_PKGS)
 
-#app etc...
+app: #installing not dotfiles app
+	$(PACMAN) $(PACKAGES)
+
+#dotfiles app etc...
 urxvt: # Init rxvt-unicode terminal
 	$(PACMAN) rxvt-unicode
 	ln -vsf ${PWD}/.Xresources ${HOME}/.Xresources
@@ -52,6 +55,10 @@ emacs: #installing emacs
 	test -L ${HOME}/.emacs.d || rm -rf ${HOME}/.emacs.d
 	ln -vsfn ${PWD}/.emacs.d ${HOME}/.emacs.d
 
+bash: #Installing Bash
+	$(PACMAN) $@
+	ln -vsf ${PWD}/.bashrc ${HOME}/.bashrc
+
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
 	$(PACMAN) $@
@@ -64,5 +71,5 @@ docker_image: docker
 testbackup: docker_image # Test this Makefile with mount backup directory
 	docker run -it --name make$@ -v ${HOME}/bk_Archlinux:${HOME}/bk_Archlinux:cached --name makefiletest -d dotfiles:latest /bin/bash
 
-appinstall: update_pacman urxvt dzdoom emacs
+appinstall: update_pacman urxvt dzdoom emacs bash
 create_docker: docker docker_image testbackup
