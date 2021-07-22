@@ -3,7 +3,8 @@ PACMAN := sudo pacman -S
 PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
 
-PACKAGES := man-db man-pages
+PACKAGES := man-db man-pages rxvt-unicode emacs xfce xfce4-pulseaudio-plugin
+PACKAGES += mousepad xfce4-pulseaudio-plugin xfce4-screensaver bash docker
 
 #26packages
 BASE_PKGS := filesystem gcc-libs glibc bash coreutils file findutils gawk
@@ -59,6 +60,12 @@ bash: #Installing Bash
 	$(PACMAN) $@
 	ln -vsf ${PWD}/.bashrc ${HOME}/.bashrc
 
+xfce: #Install DE
+	$(PACMAN) $@4
+	$(PACMAN) mousepad
+	$(PACMAN) xfce4-pulseaudio-plugin
+	$(PACMAN) xfce4-screensaver
+
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
 	$(PACMAN) $@
@@ -71,5 +78,5 @@ docker_image: docker
 testbackup: docker_image # Test this Makefile with mount backup directory
 	docker run -it --name make$@ -v ${HOME}/bk_Archlinux:${HOME}/bk_Archlinux:cached --name makefiletest -d dotfiles:latest /bin/bash
 
-appinstall: update_pacman urxvt dzdoom emacs bash
+appinstall: update_pacman urxvt dzdoom emacs bash xfce
 create_docker: docker docker_image testbackup
