@@ -3,8 +3,9 @@ PACMAN := sudo pacman -S
 PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
 
-PACKAGES := man-db man-pages rxvt-unicode emacs xfce xfce4-pulseaudio-plugin
-PACKAGES += mousepad xfce4-pulseaudio-plugin xfce4-screensaver bash docker
+PACKAGES := man-db man-pages rxvt-unicode emacs xfce4-pulseaudio-plugin
+PACKAGES += xmonad xmonad-contrib dmenu bash docker ranger w3m flameshot
+PACKAGES += fcitx5-im fcitx5-mozc
 
 #26packages
 BASE_PKGS := filesystem gcc-libs glibc bash coreutils file findutils gawk
@@ -60,11 +61,25 @@ bash: #Installing Bash
 	$(PACMAN) $@
 	ln -vsf ${PWD}/.bashrc ${HOME}/.bashrc
 
-xfce: #Install DE
-	$(PACMAN) $@4
-	$(PACMAN) mousepad
-	$(PACMAN) xfce4-pulseaudio-plugin
-	$(PACMAN) xfce4-screensaver
+xmonad: #Install DE
+	$(PACMAN) $@
+	$(PACMAN) $@-contrib
+	$(PACMAN) dmenu
+	ln -vsf ${PWD}/.xinitrc ${HOME}/.xinitrc
+	ln -vsfn ${PWD}/.xmonad ${HOME}/.xmonad
+
+ranger: # CLI file manager
+	$(PACMAN) $@
+	ln -vsfn ${PWD}/.config/ranger ${HOME}/.config/ranger
+
+w3m: ranger #Install w3m for ranger
+	$(PACMAN) $@
+
+fcitx5: #IM
+	$(PACMAN) $@-im $@-mozc
+
+flameshot: #Screenshot
+	$(PACMAN) $@
 
 #creating test env etc...
 docker: # initial setup(exexute enable and start)

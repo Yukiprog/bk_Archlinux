@@ -128,3 +128,7 @@ export NVM_DIR="$HOME/.nvm"
 #export DISPLAY=`ip route | grep 'default via' | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`:0
 
 export PATH="$PATH":"/home/yuki/.opam/default/bin"
+
+#ranger
+export PATH="$PATH":"/usr/lib/w3m/"
+

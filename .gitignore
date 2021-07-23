@@ -32,3 +32,14 @@
 !/.emacs.d/elisp/**
 
 !/.bashrc
+
+!/.xinitrc
+
+!/.xmonad/
+/.xmonad/*
+!/.xmonad/xmonad.hs
+
+!/.config/
+/.config/*
+!/.config/ranger/
+!/.config/ranger/*
