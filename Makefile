@@ -34,15 +34,15 @@ base: #installing base packages
 base_devel: #installing base_devel packages
 	$(PACMAN) $(BASE_DEVEL_PKGS)
 
-app: #installing not dotfiles app
+app: #installing app
 	$(PACMAN) $(PACKAGES)
 
-#dotfiles app etc...
-urxvt: # Init rxvt-unicode terminal
+#installing Each app
+urxvt: # rxvt-unicode terminal
 	$(PACMAN) rxvt-unicode
 	ln -vsf ${PWD}/.Xresources ${HOME}/.Xresources
 
-dzdoom: # on the assumption,  Installing yay and Existing rar file in Files directory. Considering later...
+dzdoom: #on the assumption,  Installing yay and Existing rar file in Files directory. Considering later...
 	yay -S brutal-doom
 	$(PACMAN) unrar
 	unrar e ${PWD}/Files/brutalv21.rar
@@ -52,16 +52,16 @@ dzdoom: # on the assumption,  Installing yay and Existing rar file in Files dire
 	test -L ${HOME}/.config/gzdoom || rm -rf ${HOME}/.config/gzdoom
 	ln -vsfn ${PWD}/.config/gzdoom ${HOME}/.config/gzdoom
 
-emacs: #installing emacs
+emacs: #emacs
 	$(PACMAN) $@
 	test -L ${HOME}/.emacs.d || rm -rf ${HOME}/.emacs.d
 	ln -vsfn ${PWD}/.emacs.d ${HOME}/.emacs.d
 
-bash: #Installing Bash
+bash: #Bash
 	$(PACMAN) $@
 	ln -vsf ${PWD}/.bashrc ${HOME}/.bashrc
 
-xmonad: #Install DE
+xmonad: #WM
 	$(PACMAN) $@
 	$(PACMAN) $@-contrib
 	$(PACMAN) dmenu
@@ -74,7 +74,7 @@ ranger: # CLI file manager
 	test -L ${HOME}/.config/ranger || rm -rf ${HOME}/.config/ranger
 	ln -vsfn ${PWD}/.config/ranger ${HOME}/.config/ranger
 
-w3m: ranger #Install w3m for ranger
+w3m: ranger #w3m for ranger
 	$(PACMAN) $@
 	$(PACMAN) imlib2
 
@@ -96,5 +96,5 @@ docker_image: docker
 testbackup: docker_image # Test this Makefile with mount backup directory
 	docker run -it --name make$@ -v ${HOME}/bk_Archlinux:${HOME}/bk_Archlinux:cached --name makefiletest -d dotfiles:latest /bin/bash
 
-appinstall: update_pacman urxvt dzdoom emacs bash xfce
+appinstall: update_pacman urxvt dzdoom emacs bash
 create_docker: docker docker_image testbackup
