@@ -3,7 +3,7 @@ PACMAN := sudo pacman -S
 PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
 
-PACKAGES := man-db man-pages rxvt-unicode emacs xfce4-pulseaudio-plugin
+PACKAGES := man-db man-pages rxvt-unicode emacs pulseaudio
 PACKAGES += xmonad xmonad-contrib dmenu bash docker ranger w3m  imlib2 flameshot
 PACKAGES += fcitx5-im fcitx5-mozc
 
@@ -56,6 +56,9 @@ emacs: #emacs
 	$(PACMAN) $@
 	test -L ${HOME}/.emacs.d || rm -rf ${HOME}/.emacs.d
 	ln -vsfn ${PWD}/.emacs.d ${HOME}/.emacs.d
+
+pulseaudio: #Sound
+	$(PACMAN) $@
 
 bash: #Bash
 	$(PACMAN) $@
