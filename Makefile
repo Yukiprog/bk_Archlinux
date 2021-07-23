@@ -4,7 +4,7 @@ PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
 
 PACKAGES := man-db man-pages rxvt-unicode emacs xfce4-pulseaudio-plugin
-PACKAGES += xmonad xmonad-contrib dmenu bash docker ranger w3m flameshot
+PACKAGES += xmonad xmonad-contrib dmenu bash docker ranger w3m  imlib2 flameshot
 PACKAGES += fcitx5-im fcitx5-mozc
 
 #26packages
@@ -66,20 +66,23 @@ xmonad: #Install DE
 	$(PACMAN) $@-contrib
 	$(PACMAN) dmenu
 	ln -vsf ${PWD}/.xinitrc ${HOME}/.xinitrc
+	test -L ${HOME}/.xmonad || rm -rf ${HOME}/.xmonad
 	ln -vsfn ${PWD}/.xmonad ${HOME}/.xmonad
 
 ranger: # CLI file manager
 	$(PACMAN) $@
+	test -L ${HOME}/.config/ranger || rm -rf ${HOME}/.config/ranger
 	ln -vsfn ${PWD}/.config/ranger ${HOME}/.config/ranger
 
 w3m: ranger #Install w3m for ranger
 	$(PACMAN) $@
-
-fcitx5: #IM
-	$(PACMAN) $@-im $@-mozc
+	$(PACMAN) imlib2
 
 flameshot: #Screenshot
 	$(PACMAN) $@
+
+fcitx5: #IM
+	$(PACMAN) $@-im $@-mozc
 
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
