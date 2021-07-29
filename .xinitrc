@@ -11,4 +11,6 @@ xrdb ~/.Xresources
 #Screenshot
 flameshot &
 
+sh ~/.fehbg &
+
 exec xmonad

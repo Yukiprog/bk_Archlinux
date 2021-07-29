@@ -17,8 +17,6 @@ audit
 autoconf
 automake
 avahi
-barrier
-barrier-headless
 base
 bash
 binutils
@@ -74,9 +72,11 @@ fcitx5-configtool
 fcitx5-gtk
 fcitx5-mozc
 fcitx5-qt
+feh
 ffmpeg
 file
 filesystem
+filezilla
 findutils
 firefox
 flac
@@ -133,6 +133,7 @@ gstreamer
 gtk-update-icon-cache
 gtk3
 gtkmm3
+gtksourceview4
 guile
 gvfs
 gzip
@@ -156,7 +157,6 @@ haskell-x11-xft
 hicolor-icon-theme
 hidapi
 htop
-hunspell
 hwids
 hyphen
 iana-etc
@@ -228,9 +228,9 @@ libedit
 libelf
 libepoxy
 libevdev
-libevent
 libexif
 libffi
+libfilezilla
 libfontenc
 libgcrypt
 libgdiplus
@@ -312,7 +312,6 @@ libtool
 libunistring
 libunwind
 libusb
-libutempter
 libva
 libvdpau
 libvorbis
@@ -376,6 +375,7 @@ mkinitcpio
 mkinitcpio-busybox
 mobile-broadband-provider-info
 mono
+mousepad
 mpfr
 mpg123
 mtdev
@@ -520,7 +520,6 @@ tar
 tdb
 texinfo
 thin-provisioning-tools
-tmux
 tslib
 ttf-liberation
 tzdata
@@ -547,6 +546,8 @@ wireless_tools
 woff2
 wpa_supplicant
 wpebackend-fdo
+wxgtk-common
+wxgtk3
 x264
 x265
 xcb-imdkit
