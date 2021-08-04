@@ -2,4 +2,6 @@ import XMonad
 
 main :: IO()
 main = do
-    xmonad defaultConfig
+    xmonad $ defaultConfig {
+    terminal = "urxvtc"
+  }

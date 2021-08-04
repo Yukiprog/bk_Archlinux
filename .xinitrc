@@ -11,6 +11,12 @@ xrdb ~/.Xresources
 #Screenshot
 flameshot &
 
+#wallpaper
 sh ~/.fehbg &
 
+#urxvt daemon
+urxvtd --quiet --fork --opendisplay
+
+
 exec xmonad
+
