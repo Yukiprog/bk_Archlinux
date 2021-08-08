@@ -91,7 +91,7 @@ vim: #vim
 	$(PACMAN) $@
 	test -L ${HOME}/.vim || rm -rf ${HOME}/.vim
 	ln -vsfn ${PWD}/.vim ${HOME}/.vim
-	ln -vsf ${PWD}/.vimrc ${HOME}.vimrc
+	ln -vsf ${PWD}/.vimrc ${HOME}/.vimrc
 
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
