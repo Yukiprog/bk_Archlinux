@@ -93,7 +93,7 @@
  '(column-number-mode t)
  '(display-time-mode t)
  '(package-selected-packages
-   '(undo-tree zotelo ivy counsel nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## use-package lsp-mode lsp-java neotree))
+   '(haskell-mode undo-tree zotelo ivy counsel nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## use-package lsp-mode lsp-java neotree))
  '(show-paren-mode t)
  '(size-indication-mode t))
 (custom-set-faces
@@ -224,4 +224,11 @@
 (global-set-key (kbd  "C-x C-]") 'all-indent)
 
 
+;; haskell
+(autoload 'haskell-mode "haskell-mode" nil t)
+(autoload 'haskell-cabal "haskell-cabal" nil t)
+
+(add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
+(add-to-list 'auto-mode-alist '("\\.lhs$" . literate-haskell-mode))
+(add-to-list 'auto-mode-alist '("\\.cable$" . haskell-cabal-mode))
 

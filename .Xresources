@@ -74,3 +74,6 @@ URxvt.tabbed.tabbar-fg: 243
 URxvt.tabbed.tabbar-bg: 237
 URxvt.tabbed.tab-fg:    250
 URxvt.tabbed.tab-bg:    30
+
+!! Cursor size
+Xcursor.size: 48 
