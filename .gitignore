@@ -43,3 +43,10 @@
 /.config/*
 !/.config/ranger/
 !/.config/ranger/*
+
+!/.vim/
+/.vim/*
+!/.vim/rc/
+!/.vim/rc/*
+
+!/.vimrc

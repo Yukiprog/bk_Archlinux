@@ -5,7 +5,7 @@ SYSTEMD_ENABLE := sudo systemctl --now enable
 
 PACKAGES := man-db man-pages rxvt-unicode emacs pulseaudio
 PACKAGES += xmonad xmonad-contrib dmenu bash docker ranger w3m  imlib2 flameshot
-PACKAGES += fcitx5-im fcitx5-mozc
+PACKAGES += fcitx5-im fcitx5-mozc vim
 
 #26packages
 BASE_PKGS := filesystem gcc-libs glibc bash coreutils file findutils gawk
@@ -86,6 +86,12 @@ flameshot: #Screenshot
 
 fcitx5: #IM
 	$(PACMAN) $@-im $@-mozc
+
+vim: #vim
+	$(PACMAN) $@
+	test -L ${HOME}/.vim || rm -rf ${HOME}/.vim
+	ln -vsfn ${PWD}/.vim ${HOME}/.vim
+	ln -vsf ${PWD}/.vimrc ${HOME}.vimrc
 
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
