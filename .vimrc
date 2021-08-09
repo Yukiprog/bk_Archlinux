@@ -75,8 +75,8 @@ set tabstop=4
 "行頭でのTab文字の表示幅
 set shiftwidth=4
 
-"対応する括弧をハイライト
-"set showmatch
+"画面右端に行列番号
+set ruler
 
 "コードの色分け
 colorscheme molokai
@@ -85,23 +85,11 @@ colorscheme molokai
 set autoindent 
 set nocompatible
 
-"インデントの可視化するプラグイン
-set list listchars=tab:\¦\
-
 "j,kを押下した時の速度を早くするプラグイン
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
-
-setlocal omnifunc=syntaxcomplete#Complete
-
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-
-"vim-gitgutter用　変更箇所ハイライト
-let g:gitgutter_highlight_lines = 1
 
 "ターミナル設定
 set splitbelow
 set termwinsize=7x0
 
-" 隠しファイルをデフォルトで表示させる
-let NERDTreeShowHidden = 1

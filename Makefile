@@ -5,7 +5,7 @@ SYSTEMD_ENABLE := sudo systemctl --now enable
 
 PACKAGES := man-db man-pages rxvt-unicode emacs pulseaudio
 PACKAGES += xmonad xmonad-contrib dmenu bash docker ranger w3m  imlib2 flameshot
-PACKAGES += fcitx5-im fcitx5-mozc vim
+PACKAGES += fcitx5-im fcitx5-mozc feh vim
 
 #26packages
 BASE_PKGS := filesystem gcc-libs glibc bash coreutils file findutils gawk
@@ -57,9 +57,6 @@ emacs: #emacs
 	test -L ${HOME}/.emacs.d || rm -rf ${HOME}/.emacs.d
 	ln -vsfn ${PWD}/.emacs.d ${HOME}/.emacs.d
 
-pulseaudio: #Sound
-	$(PACMAN) $@
-
 bash: #Bash
 	$(PACMAN) $@
 	ln -vsf ${PWD}/.bashrc ${HOME}/.bashrc
@@ -78,14 +75,7 @@ ranger: # CLI file manager
 	ln -vsfn ${PWD}/.config/ranger ${HOME}/.config/ranger
 
 w3m: ranger #w3m for ranger
-	$(PACMAN) $@
 	$(PACMAN) imlib2
-
-flameshot: #Screenshot
-	$(PACMAN) $@
-
-fcitx5: #IM
-	$(PACMAN) $@-im $@-mozc
 
 vim: #vim
 	$(PACMAN) $@
@@ -105,5 +95,6 @@ docker_image: docker
 testbackup: docker_image # Test this Makefile with mount backup directory
 	docker run -it --name make$@ -v ${HOME}/bk_Archlinux:${HOME}/bk_Archlinux:cached --name makefiletest -d dotfiles:latest /bin/bash
 
-appinstall: update_pacman urxvt dzdoom emacs bash
+appinstall: update_pacman urxvt dzdoom emacs bash vim
 create_docker: docker docker_image testbackup
+configuration: urxvt bash xmonad vim ranger
