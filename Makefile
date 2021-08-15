@@ -83,6 +83,16 @@ vim: #vim
 	ln -vsfn ${PWD}/.vim ${HOME}/.vim
 	ln -vsf ${PWD}/.vimrc ${HOME}/.vimrc
 
+git: #git
+	$(PACMAN) $@
+
+ssh: #ssh daemon
+	$(PACMAN) open$@
+	systemctl enable sshd 
+
+tmux:
+	$(PACMAN) $@
+	ln -vsf ${PWD}/.tmux.conf ${HOME}/.tmux.conf
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
 	$(PACMAN) $@
@@ -98,3 +108,6 @@ testbackup: docker_image # Test this Makefile with mount backup directory
 appinstall: update_pacman urxvt dzdoom emacs bash vim
 create_docker: docker docker_image testbackup
 configuration: urxvt bash xmonad vim ranger
+virtual_m: bash vim docker docker_image testbackup git ssh tmux
+
+

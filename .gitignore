@@ -50,3 +50,5 @@
 !/.vim/rc/*
 
 !/.vimrc
+
+!/.tmux.conf
