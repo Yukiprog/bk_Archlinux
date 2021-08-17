@@ -3,9 +3,8 @@ PACMAN := sudo pacman -S
 PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
 
-PACKAGES := man-db man-pages rxvt-unicode emacs pulseaudio
-PACKAGES += xmonad xmonad-contrib dmenu bash docker ranger w3m  imlib2 flameshot
-PACKAGES += fcitx5-im fcitx5-mozc feh vim
+PACKAGES := man-db man-pages pulseaudio pavucontrol
+PACKAGES += flameshot fcitx5-im fcitx5-mozc 
 
 #26packages
 BASE_PKGS := filesystem gcc-libs glibc bash coreutils file findutils gawk
@@ -75,10 +74,12 @@ ranger: # CLI file manager
 	ln -vsfn ${PWD}/.config/ranger ${HOME}/.config/ranger
 
 w3m: ranger #w3m for ranger
+	$(PACMAN) $@
 	$(PACMAN) imlib2
 
-vim: #vim
+vim: #vim https://blog.htkyama.org/vim_plugins_dein
 	$(PACMAN) $@
+	mkdir ~/Downloads
 	test -L ${HOME}/.vim || rm -rf ${HOME}/.vim
 	ln -vsfn ${PWD}/.vim ${HOME}/.vim
 	ln -vsf ${PWD}/.vimrc ${HOME}/.vimrc
@@ -90,9 +91,10 @@ ssh: #ssh daemon
 	$(PACMAN) open$@
 	systemctl enable sshd 
 
-tmux:
+feh: #feh
 	$(PACMAN) $@
-	ln -vsf ${PWD}/.tmux.conf ${HOME}/.tmux.conf
+	ln -vsf ${PWD}/.fehbg ${HOME}/.fehbg
+
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
 	$(PACMAN) $@
@@ -105,9 +107,11 @@ docker_image: docker
 testbackup: docker_image # Test this Makefile with mount backup directory
 	docker run -it --name make$@ -v ${HOME}/bk_Archlinux:${HOME}/bk_Archlinux:cached --name makefiletest -d dotfiles:latest /bin/bash
 
-appinstall: update_pacman urxvt dzdoom emacs bash vim
+appinstall: app
+default: git ssh
+dotfiles: urxvt bash xmonad ranger w3m vim feh
 create_docker: docker docker_image testbackup
-configuration: urxvt bash xmonad vim ranger
+
 virtual_m: bash vim docker docker_image testbackup git ssh tmux
 
 
