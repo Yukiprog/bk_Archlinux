@@ -4,7 +4,7 @@ PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
 
 PACKAGES := man-db man-pages pulseaudio pavucontrol
-PACKAGES += flameshot fcitx5-im fcitx5-mozc 
+PACKAGES += flameshot fcitx5-im fcitx5-mozc gpsbabel
 
 #26packages
 BASE_PKGS := filesystem gcc-libs glibc bash coreutils file findutils gawk
