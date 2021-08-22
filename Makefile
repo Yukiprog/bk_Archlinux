@@ -4,7 +4,7 @@ PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
 
 PACKAGES := man-db man-pages pulseaudio pavucontrol
-PACKAGES += flameshot fcitx5-im fcitx5-mozc gpsbabel
+PACKAGES += flameshot fcitx5-im fcitx5-mozc fcitx-configtool gpsbabel otf-ipafonth
 
 #26packages
 BASE_PKGS := filesystem gcc-libs glibc bash coreutils file findutils gawk
@@ -83,10 +83,10 @@ vim: #vim https://blog.htkyama.org/vim_plugins_dein
 	test -L ${HOME}/.vim || rm -rf ${HOME}/.vim
 	ln -vsfn ${PWD}/.vim ${HOME}/.vim
 	ln -vsf ${PWD}/.vimrc ${HOME}/.vimrc
-	mkdir -p ~/.cache/dein
-	cd ~/.cache/dein
-	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-	sh ./installer.sh ~/.cache/dein
+#	mkdir -p ~/.cache/dein
+#	cd ~/.cache/dein
+#	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+#	sh ./installer.sh ~/.cache/dein
 
 git: #git
 	$(PACMAN) $@
@@ -98,6 +98,9 @@ ssh: #ssh daemon
 feh: #feh
 	$(PACMAN) $@
 	ln -vsf ${PWD}/.fehbg ${HOME}/.fehbg
+
+ricty: #Ricty
+	yay -S ttf-ricty --editmenu
 
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
@@ -112,7 +115,7 @@ testbackup: docker_image # Test this Makefile with mount backup directory
 	docker run -it --name make$@ -v ${HOME}/bk_Archlinux:${HOME}/bk_Archlinux:cached --name makefiletest -d dotfiles:latest /bin/bash
 
 appinstall: app
-default: git ssh
+default: git ssh ricty
 dotfiles: urxvt bash xmonad ranger w3m vim feh
 create_docker: docker docker_image testbackup
 
