@@ -1,0 +1,22 @@
+sudo pacman -S iw wpa_supplicant
+ip addr
+
+#for example, network interface is wlp3s0
+sudo iw dev wlp3s0 scan | grep your-SSID | less
+
+sudo touch /etc/wpa_supplicant/wpa_supplicant-wlp3s0.conf
+
+\\The contents of the file
+ctrl_interface=/run/wpa_supplicant
+ctrl_interface group=wheel
+update_config=1
+ap_scan=1
+\\
+
+sudo wpa_passphrase your-SSID your-SSID-PASS | tee -a /etc/wpa_supplicant/wifi.conf
+
+sudo systemctl enabled dhcpcd@wlp3s0.service
+sudo systemctl start dhcpcd@wlp3s0.service
+
+sudo systemctl enable wpa_supplicant@wlp3s0
+sudo systemctl start wpa_supplicant@wlp3s0
