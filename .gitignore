@@ -18,19 +18,6 @@
 
 !/.Xresources
 
-
-!/.emacs.d/
-/.emacs.d/*
-!/.emacs.d/init.el
-
-!/.emacs.d/elpa/
-/.emacs.d/elpa/**
-!/.emacs.d/elpa/**
-
-!/.emacs.d/elisp/
-/.emacs.d/elisp/**
-!/.emacs.d/elisp/**
-
 !/.bashrc
 
 !/.xinitrc
@@ -51,10 +38,7 @@
 
 !/.vimrc
 
-!/.tmux.conf
-
 !/.fehbg
-
 
 !/note/
 /note/*
