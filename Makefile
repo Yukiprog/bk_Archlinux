@@ -68,6 +68,10 @@ xmonad: #WM
 	test -L ${HOME}/.xmonad || rm -rf ${HOME}/.xmonad
 	ln -vsfn ${PWD}/.xmonad ${HOME}/.xmonad
 
+xmobar: #xmobar
+	$(PACMAN) $@
+	ln -vsf ${PWD}/.xmobarrc ${HOME}/.xmobarrc
+
 ranger: # CLI file manager
 	$(PACMAN) $@
 	test -L ${HOME}/.config/ranger || rm -rf ${HOME}/.config/ranger
@@ -116,7 +120,7 @@ testbackup: docker_image # Test this Makefile with mount backup directory
 
 appinstall: app
 default: git ssh ricty
-dotfiles: urxvt bash xmonad ranger w3m vim feh
+dotfiles: urxvt bash xmonad xmobar ranger w3m vim feh
 create_docker: docker docker_image testbackup
 
 virtual_m: bash vim docker docker_image testbackup git ssh tmux

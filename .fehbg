@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-scale '/home/yuki/Pictures/albert.jpg' 
+feh --no-fehbg --bg-scale ~/Pictures/albert.jpg
