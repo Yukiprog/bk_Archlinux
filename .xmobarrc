@@ -1,0 +1,15 @@
+Config { font = "xft:Ricty:size=16"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = Top
+       , border = NoBorder
+       , borderColor = "grey"
+       , lowerOnStart = True
+       , commands = [ 
+                      Run Date "%a %m/%d %H:%M" "date" 10
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ <fc=#ee9a00>%date%</fc>" 
+       }

@@ -1,7 +1,7 @@
 import XMonad
+import XMonad.Hooks.DynamicLog
 
-main :: IO()
-main = do
-    xmonad $ defaultConfig {
+main = xmonad =<< xmobar defaultConfig
+ {
     terminal = "urxvtc"
   }

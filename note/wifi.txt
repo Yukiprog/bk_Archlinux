@@ -15,7 +15,7 @@ ap_scan=1
 
 sudo wpa_passphrase your-SSID your-SSID-PASS | tee -a /etc/wpa_supplicant/wifi.conf
 
-sudo systemctl enabled dhcpcd@wlp3s0.service
+sudo systemctl enable dhcpcd@wlp3s0.service
 sudo systemctl start dhcpcd@wlp3s0.service
 
 sudo systemctl enable wpa_supplicant@wlp3s0
