@@ -59,7 +59,7 @@ emacs: #emacs
 bash: #Bash
 	$(PACMAN) $@
 	ln -vsf ${PWD}/.bashrc ${HOME}/.bashrc
-
+	ln -vsf ${PWD}/.bash_profile ${HOME}/.bash_profile
 xmonad: #WM
 	$(PACMAN) $@
 	$(PACMAN) $@-contrib
