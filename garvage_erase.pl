@@ -46,8 +46,6 @@ def rm_garbage():
             else:
                 shutil.rmtree(found_file)
         print("Compleated")
-    else:
-        print("Cancel")
 
 if __name__ == '__main__':
     rm_garbage()
