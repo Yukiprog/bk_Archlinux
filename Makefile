@@ -88,7 +88,7 @@ vim: #vim https://blog.htkyama.org/vim_plugins_dein
 	ln -vsf ${PWD}/.vimrc ${HOME}/.vimrc
 	mkdir -p ~/.cache/dein
 	cd ~/.cache/dein && curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-	sh ./installer.sh ~/.cache/dein
+	cd ~/.cache/dein &&	sh ./installer.sh ~/.cache/dein
 
 git: #git
 	$(PACMAN) $@
@@ -104,6 +104,9 @@ feh: #feh
 ricty: #Ricty
 	yay -S ttf-ricty --editmenu
 
+tmux: #tmux
+	$(PACMAN) $@
+	ln -vsf ${PWD}/.tmux.conf ${HOME}/.tmux.conf
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
 	$(PACMAN) $@
@@ -121,6 +124,6 @@ default: git ssh ricty
 dotfiles: urxvt bash xmonad xmobar ranger w3m vim feh
 create_docker: docker docker_image testbackup
 
-virtual_m: bash vim docker docker_image testbackup git ssh tmux
+virtual_m: bash vim git docker docker_image testbackup tmux git ssh
 
 
