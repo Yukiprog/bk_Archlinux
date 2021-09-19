@@ -107,6 +107,7 @@ ricty: #Ricty
 tmux: #tmux
 	$(PACMAN) $@
 	ln -vsf ${PWD}/.tmux.conf ${HOME}/.tmux.conf
+
 #creating test env etc...
 docker: # initial setup(exexute enable and start)
 	$(PACMAN) $@
