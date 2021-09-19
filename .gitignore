@@ -47,6 +47,6 @@
 
 !/.bash_profile
 
-!/garvage_erase.pl
+!/garvage_erase.py
 
 !/.tmux.conf
