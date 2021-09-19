@@ -4,7 +4,7 @@ PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
 
 PACKAGES := man-db man-pages pulseaudio pavucontrol
-PACKAGES += flameshot fcitx5-im fcitx5-mozc fcitx-configtool gpsbabel otf-ipafonth
+PACKAGES += flameshot fcitx5-im fcitx5-mozc fcitx5-configtool gpsbabel otf-ipafont
 
 #26packages
 BASE_PKGS := filesystem gcc-libs glibc bash coreutils file findutils gawk
@@ -95,7 +95,7 @@ git: #git
 
 ssh: #ssh daemon
 	$(PACMAN) open$@
-	systemctl enable sshd 
+	sudo systemctl enable sshd 
 
 feh: #feh
 	$(PACMAN) $@
