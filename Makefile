@@ -95,7 +95,7 @@ git: #git
 
 ssh: #ssh daemon
 	$(PACMAN) open$@
-	sudo systemctl enable sshd 
+	$(SYSTEMD_ENABLE) sshd 
 
 feh: #feh
 	$(PACMAN) $@
