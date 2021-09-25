@@ -9,7 +9,7 @@ Config {
        , commands = [ 
                       Run Date "%a %m/%d %H:%M" "date" 10
                     , Run StdinReader
-                    , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%|<total2>%|<total3>%"
+                    , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%|"
                              , "--Low"      , "50"         -- units: %
                              , "--High"     , "85"         -- units: %
                              , "--low"      , "darkgreen"
@@ -23,15 +23,30 @@ Config {
                              , "--normal"   , "darkorange"
                              , "--high"     , "darkred"
                              ] 10
-                    , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+                    , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s↑|<rx>kB/s↓"
                              , "--Low"      , "1000"       -- units: kB/s
                              , "--High"     , "5000"       -- units: kB/s
                              , "--low"      , "darkgreen"
                              , "--normal"   , "darkorange"
                              , "--high"     , "darkred"
                              ] 10
+                    , Run Battery        [ "--template" , "battery: <acstatus>"
+                             , "--Low"      , "10"        -- units: %
+                             , "--High"     , "80"        -- units: %
+                             , "--low"      , "darkred"
+                             , "--normal"   , "darkorange"
+                             , "--high"     , "darkgreen"
+
+                             , "--" -- battery specific options
+                                       -- discharging status
+                                       , "-o"	, "<left>% (<timeleft>)"
+                                       -- AC "on" status
+                                       , "-O"	, "<fc=#dAA520>Charging</fc>"
+                                       -- charged status
+                                       , "-i"	, "<fc=#006000>Charged</fc>"
+                             ] 50
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %multicpu% | %memory% | %dynnetwork% | <fc=#ee9a00>%date%</fc>" 
+       , template = "%StdinReader% }{ %multicpu% | %memory% | %dynnetwork% | %battery% | <fc=#ee9a00>%date%</fc>" 
        }
