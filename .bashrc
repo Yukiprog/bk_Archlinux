@@ -1,7 +1,7 @@
 export PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 export EDITOR='vim'
 
-#setxkbmap -option ctrl:nocaps
+setxkbmap -option ctrl:nocaps
 
 #w3m for ranger
 export PATH="$PATH":"/usr/lib/w3m/"
@@ -12,6 +12,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias grep='grep --color=auto'     
 
+export GOPATH=~/go
+export PATH=$GOPATH/bin:$PATH
 export PATH=~/anaconda3/bin:$PATH
 export PATH=/path/to/anaconda3/bin:$PATH
 
