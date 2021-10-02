@@ -118,7 +118,7 @@ testbackup: docker_image # Test this Makefile with mount backup directory
 
 appinstall: app
 default: git ssh ricty
-dotfiles: urxvt bash xmonad xmobar ranger w3m vim feh tmux
+dotfiles: urxvt bash xmonad xmobar ranger w3m vim tmux
 create_docker: docker docker_image testbackup
 
 virtual_m: bash vim git docker docker_image testbackup tmux git ssh
