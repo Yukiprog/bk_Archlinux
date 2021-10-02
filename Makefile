@@ -97,10 +97,6 @@ ssh: #ssh daemon
 	$(PACMAN) open$@
 	$(SYSTEMD_ENABLE) sshd 
 
-feh: #feh
-	$(PACMAN) $@
-	ln -vsf ${PWD}/.fehbg ${HOME}/.fehbg
-
 ricty: #Ricty
 	yay -S ttf-ricty --editmenu
 
