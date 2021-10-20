@@ -44,8 +44,10 @@ def rm_garbage():
         for found_file in found:
             if os.path.isfile(found_file):
                 os.remove(found_file)
-            else:
+            elif os.path.dir:
                 shutil.rmtree(found_file)
+            else:
+                os.unlink(found_file)
         print("Compleated")
 
 if __name__ == '__main__':
