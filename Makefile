@@ -109,6 +109,9 @@ docker: # initial setup(exexute enable and start)
 	$(PACMAN) $@
 	sudo usermod -aG docker ${USER}
 	$(SYSTEMD_ENABLE) $@.service
+	sudo gpasswd -a $(whoami) docker
+	sudo chgrp docker /var/run/docker.sock
+	sudo systemctl restart docker
 
 docker_image: docker
 	docker build -t dotfiles ${PWD}
