@@ -2,6 +2,7 @@
 PACMAN := sudo pacman -S
 PACMAN_UPDATE := sudo pacman -Syy
 SYSTEMD_ENABLE := sudo systemctl --now enable
+TS := `date +%Y%m%d`
 
 PACKAGES := man-db man-pages pulseaudio pavucontrol
 PACKAGES += flameshot fcitx5-im fcitx5-mozc fcitx5-configtool gpsbabel otf-ipafont
@@ -23,8 +24,8 @@ update_pacman:
 #backup etc...
 backup: #backup current archlinux state
 	mkdir -p ${PWD}/ArchLinux
-	pacman -Qnq > ${PWD}/ArchLinux/pacmanlist
-	pacman -Qqem > ${PWD}/ArchLinux/aurlist
+	pacman -Qnq > ${PWD}/ArchLinux/pacmanlist_${TS}
+	pacman -Qqem > ${PWD}/ArchLinux/aurlist_${TS}
 
 #basic etc...
 base: #installing base packages
