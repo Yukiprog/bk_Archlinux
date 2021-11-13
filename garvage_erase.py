@@ -13,7 +13,8 @@ GARBAGE_LISTS = [
     '~/.xmobarrc',
     '~/.xmonad',
     '~/.config/ranger',
-    '~/.tmux.conf'
+    '~/.tmux.conf',
+    '~/.inputrc',
 ]
 
 def yes_or_no(question, default="n"):
