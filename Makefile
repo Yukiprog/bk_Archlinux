@@ -120,11 +120,16 @@ docker_image: docker
 testbackup: docker_image # Test this Makefile with mount backup directory
 	docker run -it --name make$@ -v ${HOME}/bk_Archlinux:${HOME}/bk_Archlinux:cached --name makefiletest -d dotfiles:latest /bin/bash
 
+# for wsl_arch
+bell:
+	ln -vsf ${PWD}/.inputrc ${HOME}/.inputrc
+
 appinstall: app
 default: git ssh ricty
 dotfiles: urxvt bash xmonad xmobar ranger w3m vim tmux
 create_docker: docker docker_image testbackup
 
 virtual_m: bash vim git docker docker_image testbackup tmux git ssh
+wsl_arch: bash vim tmux bell
 
 
