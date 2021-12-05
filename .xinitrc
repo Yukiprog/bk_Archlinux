@@ -14,5 +14,5 @@ flameshot &
 #urxvt daemon
 urxvtd --quiet --fork --opendisplay
 
-exec xmonad
+exec startxfce4
 

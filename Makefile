@@ -61,6 +61,7 @@ bash: #Bash
 	$(PACMAN) $@
 	ln -vsf ${PWD}/.bashrc ${HOME}/.bashrc
 	ln -vsf ${PWD}/.bash_profile ${HOME}/.bash_profile
+
 xmonad: #WM
 	$(PACMAN) $@
 	$(PACMAN) $@-contrib
@@ -72,6 +73,10 @@ xmonad: #WM
 xmobar: #xmobar
 	$(PACMAN) $@
 	ln -vsf ${PWD}/.xmobarrc ${HOME}/.xmobarrc
+
+xfce4: #WM2
+	$(PACMAN) $@
+	ln -vsf ${PWD}/.xinitrc ${HOME}/.xinitrc
 
 ranger: # CLI file manager
 	$(PACMAN) $@
