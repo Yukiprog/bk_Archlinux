@@ -93,3 +93,4 @@ nmap k <Plug>(accelerated_jk_gk)
 set splitbelow
 set termwinsize=7x0
 
+set belloff=all

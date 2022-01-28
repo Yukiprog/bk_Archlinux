@@ -15,3 +15,6 @@ alias grep='grep --color=auto'
 export GOPATH=~/go
 export PATH=$GOPATH/bin:$PATH
 export PATH=~/.local/bin:$PATH
+
+# Set up Node Version Manager
+source /usr/share/nvm/init-nvm.sh
