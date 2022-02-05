@@ -119,10 +119,10 @@ docker: # initial setup(exexute enable and start)
 	sudo chgrp docker /var/run/docker.sock
 	sudo systemctl restart docker
 
-docker_image: docker
+docker_image: #Create image
 	docker build -t dotfiles ${PWD}
 
-testbackup: docker_image # Test this Makefile with mount backup directory
+testbackup: #Create container
 	docker run -it --name make$@ -v ${HOME}/bk_Archlinux:${HOME}/bk_Archlinux:cached --name makefiletest -d dotfiles:latest /bin/bash
 
 # for wsl_arch
